@@ -1,0 +1,18 @@
+DEPENDENCIES SETUP
+==================
+
+1. Install Python 3.8 or higher
+   Download from: https://www.python.org/downloads/
+
+2. Install required packages:
+   pip install flask
+   pip install dnspython
+   pip install python-whois
+   pip install tldextract
+   pip install requests
+
+3. Verify installation:
+   python --version
+   pip list
+
+Done! Dependencies installed successfully.

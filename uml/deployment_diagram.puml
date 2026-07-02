@@ -1,0 +1,59 @@
+@startuml
+actor "End User" as user
+actor "System Administrator" as admin
+
+node "Client Device" {
+  [Web Browser] as browser
+}
+
+node "Web Server" {
+  node "Application Server" {
+    [Web Application] as webapp
+    [API Server] as api
+  }
+  node "Database Server" {
+    [Database] as db
+  }
+}
+
+node "Model Server" {
+  [URLNet Model] as urlnet
+  [Transformer Model] as transformer
+  [Feature Extractor] as extractor
+}
+
+node "Training Server" {
+  [Model Training Pipeline] as training
+}
+
+user --> browser : Uses
+admin --> training : Manages
+
+browser --> webapp : HTTP Requests
+webapp --> api : Internal calls
+api --> extractor : Feature extraction
+api --> urlnet : Model inference
+api --> transformer : Model inference
+api --> db : Data storage/retrieval
+extractor --> db : Feature storage
+urlnet --> db : Prediction storage
+transformer --> db : Prediction storage
+training --> db : Access training data
+training --> urlnet : Model updates
+training --> transformer : Model updates
+
+note top of "Web Server"
+  Hosts the main application
+  and serves web pages
+end note
+
+note top of "Model Server"
+  Runs machine learning
+  models for inference
+end note
+
+note top of "Training Server"
+  Used for model training
+  and evaluation
+end note
+@enduml

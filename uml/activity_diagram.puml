@@ -1,0 +1,22 @@
+@startuml
+start
+:User enters URL;
+:Validate URL format;
+if (Is URL valid?) then (yes)
+  :Extract features;
+  :Process with URLNet model;
+  :Process with Transformer model;
+  :Combine predictions;
+  if (Is phishing?) then (yes)
+    :Mark as phishing;
+    :Generate risk report;
+  else (no)
+    :Mark as legitimate;
+  endif
+  :Store results in database;
+  :Display results to user;
+else (no)
+  :Show error message;
+endif
+stop
+@enduml

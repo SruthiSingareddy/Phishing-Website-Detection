@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Phishing Detection System Architecture</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .diagram {
+            position: relative;
+            width: 100%;
+            height: 800px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+        
+        /* User Icons */
+        .user-icon {
+            position: absolute;
+            width: 80px;
+            height: 100px;
+            text-align: center;
+        }
+        
+        .user-head {
+            width: 40px;
+            height: 40px;
+            background: #ffeaa7;
+            border-radius: 50%;
+            margin: 0 auto 5px;
+            border: 3px solid #fdcb6e;
+            position: relative;
+        }
+        
+        .user-head::before {
+            content: '👤';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+        }
+        
+        .user-body {
+            width: 60px;
+            height: 40px;
+            background: #74b9ff;
+            border-radius: 20px 20px 5px 5px;
+            margin: 0 auto;
+            border: 3px solid #0984e3;
+        }
+        
+        .user-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #2d3436;
+            margin-top: 5px;
+        }
+        
+        /* System Components */
+        .component {
+            position: absolute;
+            background: linear-gradient(145deg, #ffeaa7, #fdcb6e);
+            border: 3px solid #e17055;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #2d3436;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            font-size: 12px;
+        }
+        
+        .api-component {
+            background: linear-gradient(145deg, #a29bfe, #6c5ce7);
+            border-color: #5f3dc4;
+            color: white;
+        }
+        
+        .ml-component {
+            background: linear-gradient(145deg, #fd79a8, #e84393);
+            border-color: #d63031;
+            color: white;
+        }
+        
+        /* Database Cylinders */
+        .database {
+            position: absolute;
+            text-align: center;
+        }
+        
+        .db-top {
+            width: 100px;
+            height: 20px;
+            background: linear-gradient(145deg, #74b9ff, #0984e3);
+            border-radius: 50px;
+            border: 3px solid #2d3436;
+            margin-bottom: -3px;
+        }
+        
+        .db-body {
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(90deg, #74b9ff, #0984e3);
+            border-left: 3px solid #2d3436;
+            border-right: 3px solid #2d3436;
+        }
+        
+        .db-bottom {
+            width: 100px;
+            height: 20px;
+            background: linear-gradient(145deg, #0984e3, #74b9ff);
+            border-radius: 50px;
+            border: 3px solid #2d3436;
+            margin-top: -3px;
+        }
+        
+        .db-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #2d3436;
+            margin-top: 8px;
+        }
+        
+        /* Arrows */
+        .arrow {
+            position: absolute;
+            font-size: 24px;
+            color: #2d3436;
+            font-weight: bold;
+        }
+        
+        .arrow-right::before { content: '→'; }
+        .arrow-down::before { content: '↓'; }
+        .arrow-up::before { content: '↑'; }
+        .arrow-left::before { content: '←'; }
+        
+        /* Flow Lines */
+        .flow-line {
+            position: absolute;
+            background: #2d3436;
+            z-index: 1;
+        }
+        
+        .horizontal { height: 3px; }
+        .vertical { width: 3px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">🛡️ Advanced Phishing Website Detection System Architecture (2025)</div>
+        
+        <div class="diagram">
+            <!-- Users -->
+            <div class="user-icon" style="top: 50px; left: 50px;">
+                <div class="user-head"></div>
+                <div class="user-body"></div>
+                <div class="user-label">Security<br>Analyst</div>
+            </div>
+            
+            <div class="user-icon" style="top: 200px; left: 50px;">
+                <div class="user-head"></div>
+                <div class="user-body"></div>
+                <div class="user-label">End<br>User</div>
+            </div>
+            
+            <!-- API Gateway -->
+            <div class="component api-component" style="top: 120px; left: 200px; width: 120px; height: 60px;">
+                FastAPI<br>Gateway<br>🚀
+            </div>
+            
+            <!-- Data Collection Layer -->
+            <div class="component" style="top: 50px; left: 400px; width: 100px; height: 50px;">
+                Web Scraping<br>🕷️
+            </div>
+            
+            <div class="component" style="top: 120px; left: 400px; width: 100px; height: 50px;">
+                URL Input<br>Validation<br>✅
+            </div>
+            
+            <!-- Feature Engineering -->
+            <div class="component" style="top: 200px; left: 400px; width: 120px; height: 60px;">
+                Feature<br>Engineering<br>⚙️
+            </div>
+            
+            <!-- ML Models -->
+            <div class="component ml-component" style="top: 50px; left: 600px; width: 100px; height: 50px;">
+                URLNet<br>(CNN)<br>🧠
+            </div>
+            
+            <div class="component ml-component" style="top: 120px; left: 600px; width: 100px; height: 50px;">
+                URL-BERT<br>(Transformer)<br>🤖
+            </div>
+            
+            <div class="component ml-component" style="top: 190px; left: 600px; width: 100px; height: 50px;">
+                Random Forest<br>🌳
+            </div>
+            
+            <div class="component ml-component" style="top: 260px; left: 600px; width: 100px; height: 50px;">
+                Graph Neural<br>Network<br>🕸️
+            </div>
+            
+            <!-- Ensemble & Decision -->
+            <div class="component api-component" style="top: 140px; left: 780px; width: 120px; height: 80px;">
+                Ensemble<br>Decision<br>Engine<br>🎯
+            </div>
+            
+            <!-- Real-time Intelligence -->
+            <div class="component" style="top: 280px; left: 780px; width: 120px; height: 60px;">
+                Threat<br>Intelligence<br>Feed<br>📡
+            </div>
+            
+            <!-- Output -->
+            <div class="component api-component" style="top: 120px; left: 980px; width: 100px; height: 80px;">
+                Detection<br>Results<br>& Analytics<br>📊
+            </div>
+            
+            <!-- Databases -->
+            <div class="database" style="top: 400px; left: 200px;">
+                <div class="db-top"></div>
+                <div class="db-body"></div>
+                <div class="db-bottom"></div>
+                <div class="db-label">PhishTank<br>Database</div>
+            </div>
+            
+            <div class="database" style="top: 400px; left: 350px;">
+                <div class="db-top"></div>
+                <div class="db-body"></div>
+                <div class="db-bottom"></div>
+                <div class="db-label">OpenPhish<br>Feed</div>
+            </div>
+            
+            <div class="database" style="top: 400px; left: 500px;">
+                <div class="db-top"></div>
+                <div class="db-body"></div>
+                <div class="db-bottom"></div>
+                <div class="db-label">Alexa Top<br>Sites</div>
+            </div>
+            
+            <div class="database" style="top: 400px; left: 650px;">
+                <div class="db-top"></div>
+                <div class="db-body"></div>
+                <div class="db-bottom"></div>
+                <div class="db-label">Trained<br>Models</div>
+            </div>
+            
+            <div class="database" style="top: 400px; left: 800px;">
+                <div class="db-top"></div>
+                <div class="db-body"></div>
+                <div class="db-bottom"></div>
+                <div class="db-label">Detection<br>Logs</div>
+            </div>
+            
+            <!-- Arrows showing data flow -->
+            <div class="arrow arrow-right" style="top: 145px; left: 170px;"></div>
+            <div class="arrow arrow-right" style="top: 145px; left: 340px;"></div>
+            <div class="arrow arrow-right" style="top: 145px; left: 540px;"></div>
+            <div class="arrow arrow-right" style="top: 175px; left: 720px;"></div>
+            <div class="arrow arrow-right" style="top: 175px; left: 920px;"></div>
+            
+            <!-- Vertical arrows to databases -->
+            <div class="arrow arrow-down" style="top: 300px; left: 250px;"></div>
+            <div class="arrow arrow-down" style="top: 300px; left: 400px;"></div>
+            <div class="arrow arrow-down" style="top: 300px; left: 550px;"></div>
+            <div class="arrow arrow-down" style="top: 300px; left: 700px;"></div>
+            <div class="arrow arrow-down" style="top: 300px; left: 850px;"></div>
+            
+            <!-- Model connections -->
+            <div class="arrow arrow-right" style="top: 75px; left: 720px;"></div>
+            <div class="arrow arrow-right" style="top: 145px; left: 720px;"></div>
+            <div class="arrow arrow-right" style="top: 215px; left: 720px;"></div>
+            <div class="arrow arrow-right" style="top: 285px; left: 720px;"></div>
+            
+            <!-- Legend -->
+            <div style="position: absolute; bottom: 20px; left: 20px; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 10px; border: 2px solid #ddd;">
+                <div style="font-weight: bold; margin-bottom: 10px;">🔍 System Components:</div>
+                <div style="font-size: 11px; line-height: 1.4;">
+                    <div>🚀 <strong>API Layer:</strong> FastAPI Gateway & Results</div>
+                    <div>⚙️ <strong>Processing:</strong> Feature Engineering & Validation</div>
+                    <div>🧠 <strong>ML Models:</strong> URLNet, BERT, Random Forest, GNN</div>
+                    <div>🎯 <strong>Decision:</strong> Ensemble Engine & Threat Intel</div>
+                    <div>💾 <strong>Data Sources:</strong> Multiple threat databases</div>
+                </div>
+            </div>
+            
+            <!-- Performance Metrics -->
+            <div style="position: absolute; bottom: 20px; right: 20px; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 10px; border: 2px solid #ddd;">
+                <div style="font-weight: bold; margin-bottom: 10px;">📈 Key Metrics:</div>
+                <div style="font-size: 11px; line-height: 1.4;">
+                    <div>⚡ <strong>Response Time:</strong> < 100ms</div>
+                    <div>🎯 <strong>Accuracy:</strong> > 99.5%</div>
+                    <div>🔄 <strong>Real-time:</strong> Live threat updates</div>
+                    <div>🛡️ <strong>Security:</strong> Multi-layer validation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

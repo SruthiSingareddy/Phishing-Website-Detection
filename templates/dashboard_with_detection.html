@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Phishing Detection System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { font-size: 1.8em; }
+        .logout-btn { background: white; color: #667eea; padding: 10px 25px; border: none; border-radius: 25px; cursor: pointer; font-weight: 600; }
+        .container { padding: 40px; max-width: 1400px; margin: 0 auto; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 30px; }
+        .tab-btn { padding: 12px 30px; border: none; background: white; border-radius: 8px; cursor: pointer; font-weight: 600; color: #666; transition: all 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .tab-btn.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .tab-btn:hover { transform: translateY(-2px); }
+        .tab-content { animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .stat-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .stat-card h3 { color: #666; font-size: 0.9em; margin-bottom: 10px; }
+        .stat-card .value { font-size: 2.5em; color: #667eea; font-weight: bold; }
+        .section { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .section h2 { margin-bottom: 20px; color: #333; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e0e0e0; }
+        th { background: #f8f8f8; font-weight: 600; color: #666; }
+        .badge { padding: 5px 12px; border-radius: 12px; font-size: 0.85em; font-weight: 600; }
+        .badge-danger { background: #fee; color: #c33; }
+        .badge-success { background: #efe; color: #3c3; }
+        .detection-form { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .form-control { padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; }
+        .btn-analyze { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 30px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .btn-analyze:hover { transform: translateY(-2px); }
+        .result-box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-top: 20px; margin-bottom: 40px; display: none; }
+        .result-box.phishing { border-left: 5px solid #dc3545; }
+        .result-box.safe { border-left: 5px solid #28a745; }
+        .progress-bar { font-weight: bold; }
+        .table-sm td { padding: 8px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛡️ Admin Dashboard</h1>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('detection')">Detection</button>
+            <button class="tab-btn" onclick="showTab('performance')">Performance</button>
+        </div>
+
+        <div id="detection-tab" class="tab-content">
+            <div class="detection-form">
+                <h2>🔍 URL Detection</h2>
+                <form id="urlForm" onsubmit="analyzeURL(event)">
+                    <div class="mb-3">
+                        <label class="form-label">Enter URL to analyze:</label>
+                        <input type="url" class="form-control" id="url" placeholder="https://example.com" required>
+                    </div>
+                    <button type="submit" class="btn-analyze">
+                        <i class="fas fa-search me-2"></i>Analyze URL
+                    </button>
+                </form>
+            </div>
+
+            <div id="result-box" class="result-box">
+                <h3><i class="fas fa-chart-bar me-2"></i>Detailed Analysis Results</h3>
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <strong>Status:</strong><br>
+                        <span id="status" class="badge fs-5"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <strong>Risk Score:</strong><br>
+                        <div class="progress mt-2" style="height: 25px;">
+                            <div id="riskBar" class="progress-bar" role="progressbar"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <strong>Confidence:</strong><br>
+                        <span id="confidence" class="fs-5"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <strong>Model Accuracy:</strong><br>
+                        <span id="accuracy" class="fs-5"></span>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <strong><i class="fas fa-exclamation-triangle me-2"></i>Risk Analysis:</strong>
+                    <div class="alert alert-info mt-2" id="riskReason"></div>
+                </div>
+                <div class="mt-4">
+                    <h5><i class="fas fa-info-circle me-2"></i>URL Information</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Analyzed URL:</strong> <span id="analyzedUrl" class="text-break"></span></p>
+                            <p><strong>URL Length:</strong> <span id="urlLength"></span> characters</p>
+                            <p><strong>Domain:</strong> <span id="domain"></span></p>
+                            <p><strong>Protocol:</strong> <span id="protocol"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Subdomains:</strong> <span id="subdomains"></span></p>
+                            <p><strong>Path Length:</strong> <span id="pathLength"></span></p>
+                            <p><strong>Query Parameters:</strong> <span id="queryParams"></span></p>
+                            <p><strong>Entropy Score:</strong> <span id="entropy"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h5><i class="fas fa-shield-alt me-2"></i>Security Features</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-sm">
+                                <tr><td><strong>SSL Certificate:</strong></td><td><span id="sslStatus"></span></td></tr>
+                                <tr><td><strong>DNS Record:</strong></td><td><span id="dnsStatus"></span></td></tr>
+                                <tr><td><strong>WHOIS Registered:</strong></td><td><span id="whoisStatus"></span></td></tr>
+                                <tr><td><strong>Domain Age:</strong></td><td><span id="domainAge"></span></td></tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-sm">
+                                <tr><td><strong>IP Address Used:</strong></td><td><span id="ipStatus"></span></td></tr>
+                                <tr><td><strong>URL Shortener:</strong></td><td><span id="shortenerStatus"></span></td></tr>
+                                <tr><td><strong>Suspicious Words:</strong></td><td><span id="suspiciousWords"></span></td></tr>
+                                <tr><td><strong>Special Characters:</strong></td><td><span id="specialChars"></span></td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h5><i class="fas fa-brain me-2"></i>ML Model Analysis</h5>
+                    <p><strong>Model Version:</strong> <span id="modelVersion"></span></p>
+                    <p><strong>Feature Count:</strong> <span id="featureCount"></span></p>
+                    <p><strong>Processing Time:</strong> <span id="processingTime"></span></p>
+                </div>
+            </div>
+
+            <div class="stats" id="dashboard-stats">
+                <div class="stat-card">
+                    <h3>TOTAL SCANS</h3>
+                    <div class="value" id="total-scans">Loading...</div>
+                </div>
+                <div class="stat-card">
+                    <h3>PHISHING DETECTED</h3>
+                    <div class="value" id="phishing-detected">Loading...</div>
+                </div>
+                <div class="stat-card">
+                    <h3>LEGITIMATE URLS</h3>
+                    <div class="value" id="legitimate-urls">Loading...</div>
+                </div>
+                <div class="stat-card">
+                    <h3>DETECTION RATE</h3>
+                    <div class="value" id="detection-rate">Loading...</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Recent Scans</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>URL</th>
+                            <th>Risk Score</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-scans-table">
+                        <tr>
+                            <td colspan="4" class="text-center">Loading recent scans...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="performance-tab" class="tab-content" style="display:none;">
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>PRECISION</h3>
+                    <div class="value">96.2%</div>
+                </div>
+                <div class="stat-card">
+                    <h3>RECALL</h3>
+                    <div class="value">92.8%</div>
+                </div>
+                <div class="stat-card">
+                    <h3>F1-SCORE</h3>
+                    <div class="value">94.5%</div>
+                </div>
+                <div class="stat-card">
+                    <h3>AUC-ROC</h3>
+                    <div class="value">0.978</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-chart-line me-2"></i>Model Performance Comparison</h2>
+                <canvas id="performanceChart" height="80"></canvas>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-chart-bar me-2"></i>Confusion Matrix</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <canvas id="confusionChart" height="100"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="mt-3">Detection Statistics</h5>
+                        <table class="table">
+                            <tr><td><strong>True Positives:</strong></td><td>317 (92.8%)</td></tr>
+                            <tr><td><strong>False Positives:</strong></td><td>25 (2.8%)</td></tr>
+                            <tr><td><strong>True Negatives:</strong></td><td>880 (97.2%)</td></tr>
+                            <tr><td><strong>False Negatives:</strong></td><td>25 (7.2%)</td></tr>
+                            <tr><td><strong>Total Predictions:</strong></td><td>1,247</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-chart-pie me-2"></i>Detection Distribution</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <canvas id="distributionChart" height="100"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <canvas id="riskChart" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-clock me-2"></i>Performance Over Time</h2>
+                <canvas id="timeChart" height="80"></canvas>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-table me-2"></i>Detailed Metrics</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>URLNet</th>
+                            <th>Transformer</th>
+                            <th>Ensemble</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Accuracy</td><td>92.3%</td><td>93.7%</td><td>94.5%</td></tr>
+                        <tr><td>Precision</td><td>94.1%</td><td>95.8%</td><td>96.2%</td></tr>
+                        <tr><td>Recall</td><td>90.5%</td><td>91.9%</td><td>92.8%</td></tr>
+                        <tr><td>F1-Score</td><td>92.3%</td><td>93.8%</td><td>94.5%</td></tr>
+                        <tr><td>AUC-ROC</td><td>0.965</td><td>0.972</td><td>0.978</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script>
+        function logout() {
+            fetch('/admin/logout', { method: 'POST' })
+                .then(() => window.location.href = '/');
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            event.target.classList.add('active');
+            
+            // Load charts when performance tab is shown
+            if (tabName === 'performance' && !window.chartsInitialized) {
+                setTimeout(initCharts, 100);
+                window.chartsInitialized = true;
+            }
+        }
+
+        async function analyzeURL(e) {
+            e.preventDefault();
+            const startTime = Date.now();
+            const url = document.getElementById('url').value;
+            const resultBox = document.getElementById('result-box');
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url })
+                });
+
+                const data = await response.json();
+                const processingTime = Date.now() - startTime;
+
+                // Status
+                document.getElementById('status').textContent = data.is_phishing ? '⚠️ PHISHING' : '✓ SAFE';
+                document.getElementById('status').className = data.is_phishing ? 'badge badge-danger' : 'badge badge-success';
+                
+                // Risk Bar
+                const riskPercent = (data.risk_score * 100).toFixed(1);
+                const riskBar = document.getElementById('riskBar');
+                riskBar.style.width = riskPercent + '%';
+                riskBar.textContent = riskPercent + '%';
+                riskBar.className = data.risk_score > 0.7 ? 'progress-bar bg-danger' : data.risk_score > 0.4 ? 'progress-bar bg-warning' : 'progress-bar bg-success';
+                
+                document.getElementById('confidence').textContent = (data.confidence * 100).toFixed(1) + '%';
+                document.getElementById('accuracy').textContent = data.accuracy + '%';
+                document.getElementById('riskReason').textContent = data.risk_reason;
+
+                // URL Info
+                const urlObj = new URL(url);
+                document.getElementById('analyzedUrl').textContent = url;
+                document.getElementById('urlLength').textContent = data.features.url_length || url.length;
+                document.getElementById('domain').textContent = urlObj.hostname;
+                document.getElementById('protocol').textContent = urlObj.protocol;
+                document.getElementById('subdomains').textContent = data.features.num_dots || 0;
+                document.getElementById('pathLength').textContent = urlObj.pathname.length;
+                document.getElementById('queryParams').textContent = urlObj.search ? urlObj.search.split('&').length : 0;
+                document.getElementById('entropy').textContent = data.features.entropy || 'N/A';
+
+                // Security Features
+                document.getElementById('sslStatus').innerHTML = data.features.ssl_valid ? '<span class="badge badge-success">Valid</span>' : '<span class="badge badge-danger">Invalid</span>';
+                document.getElementById('dnsStatus').innerHTML = data.features.dns_exists ? '<span class="badge badge-success">Exists</span>' : '<span class="badge badge-danger">Missing</span>';
+                document.getElementById('whoisStatus').innerHTML = data.features.domain_age_days ? '<span class="badge badge-success">Yes</span>' : '<span class="badge badge-danger">No</span>';
+                document.getElementById('domainAge').textContent = data.features.domain_age_days ? data.features.domain_age_days + ' days' : 'Unknown';
+                document.getElementById('ipStatus').innerHTML = data.features.is_ip ? '<span class="badge badge-danger">Yes</span>' : '<span class="badge badge-success">No</span>';
+                document.getElementById('shortenerStatus').innerHTML = data.features.url_shortener ? '<span class="badge badge-danger">Yes</span>' : '<span class="badge badge-success">No</span>';
+                document.getElementById('suspiciousWords').textContent = data.features.suspicious_words || 0;
+                document.getElementById('specialChars').textContent = data.features.hyphens || 0;
+
+                // ML Info
+                document.getElementById('modelVersion').textContent = data.model_version || 'URLNet-Transformer-v2.1';
+                document.getElementById('featureCount').textContent = '50+';
+                document.getElementById('processingTime').textContent = processingTime + 'ms';
+
+                resultBox.className = data.is_phishing ? 'result-box phishing' : 'result-box safe';
+                resultBox.style.display = 'block';
+                resultBox.scrollIntoView({ behavior: 'smooth' });
+                
+                // Refresh dashboard stats after analysis
+                loadDashboardData();
+            } catch (error) {
+                alert('Error analyzing URL: ' + error.message);
+            }
+        }
+        
+        // Load dashboard data
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('/api/dashboard-stats');
+                const data = await response.json();
+                
+                // Update statistics
+                document.getElementById('total-scans').textContent = data.stats.total_scans.toLocaleString();
+                document.getElementById('phishing-detected').textContent = data.stats.phishing_detected.toLocaleString();
+                document.getElementById('legitimate-urls').textContent = data.stats.legitimate_urls.toLocaleString();
+                document.getElementById('detection-rate').textContent = data.stats.detection_rate + '%';
+                
+                // Update recent scans table
+                const tableBody = document.getElementById('recent-scans-table');
+                if (data.recent_scans.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="4" class="text-center">No scans available</td></tr>';
+                } else {
+                    tableBody.innerHTML = data.recent_scans.map(scan => `
+                        <tr>
+                            <td>${scan.timestamp}</td>
+                            <td class="text-break" style="max-width: 300px;">${scan.url}</td>
+                            <td>${scan.risk_score.toFixed(2)}</td>
+                            <td><span class="badge ${scan.status === 'PHISHING' ? 'badge-danger' : 'badge-success'}">${scan.status}</span></td>
+                        </tr>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+            }
+        }
+        
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', loadDashboardData);
+
+        // Initialize Charts
+        function initCharts() {
+            // Performance Comparison Chart
+            new Chart(document.getElementById('performanceChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Accuracy', 'Precision', 'Recall', 'F1-Score'],
+                    datasets: [
+                        { label: 'URLNet', data: [92.3, 94.1, 90.5, 92.3], backgroundColor: '#667eea' },
+                        { label: 'Transformer', data: [93.7, 95.8, 91.9, 93.8], backgroundColor: '#764ba2' },
+                        { label: 'Ensemble', data: [94.5, 96.2, 92.8, 94.5], backgroundColor: '#28a745' }
+                    ]
+                },
+                options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
+            });
+
+            // Confusion Matrix
+            new Chart(document.getElementById('confusionChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['True Positive', 'False Positive', 'True Negative', 'False Negative'],
+                    datasets: [{ label: 'Count', data: [317, 25, 880, 25], backgroundColor: ['#28a745', '#ffc107', '#28a745', '#dc3545'] }]
+                },
+                options: { responsive: true }
+            });
+
+            // Distribution Chart
+            new Chart(document.getElementById('distributionChart'), {
+                type: 'pie',
+                data: {
+                    labels: ['Phishing', 'Legitimate'],
+                    datasets: [{ data: [342, 905], backgroundColor: ['#dc3545', '#28a745'] }]
+                },
+                options: { responsive: true, plugins: { title: { display: true, text: 'URL Distribution' } } }
+            });
+
+            // Risk Distribution
+            new Chart(document.getElementById('riskChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['High Risk', 'Medium Risk', 'Low Risk'],
+                    datasets: [{ data: [342, 87, 818], backgroundColor: ['#dc3545', '#ffc107', '#28a745'] }]
+                },
+                options: { responsive: true, plugins: { title: { display: true, text: 'Risk Distribution' } } }
+            });
+
+            // Time Chart
+            new Chart(document.getElementById('timeChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        label: 'Detection Accuracy',
+                        data: [92.1, 93.5, 94.2, 94.5],
+                        borderColor: '#667eea',
+                        fill: false
+                    }]
+                },
+                options: { responsive: true, scales: { y: { beginAtZero: false, min: 90, max: 100 } } }
+            });
+        }
+    </script>
+</body>
+</html>

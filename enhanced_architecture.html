@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Phishing Detection Architecture</title>
+    <style>
+        body { margin: 0; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-family: 'Segoe UI', Arial, sans-serif; }
+        .container { max-width: 1300px; margin: 0 auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+        h1 { text-align: center; color: #2c3e50; margin-bottom: 25px; font-size: 24px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .flow-label { font-size: 10px; fill: #7f8c8d; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ Advanced Phishing Website Detection System - 2025 Architecture</h1>
+        
+        <svg width="1250" height="750" viewBox="0 0 1250 750">
+            <!-- Background with subtle grid -->
+            <defs>
+                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f8f9fa" stroke-width="1"/>
+                </pattern>
+                <linearGradient id="userGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ffd93d;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#f39c12;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="apiGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#a29bfe;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#6c5ce7;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="processGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#fdcb6e;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#e17055;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="mlGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#fd79a8;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#e84393;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="dbGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#74b9ff;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#0984e3;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            
+            <rect width="1250" height="750" fill="url(#grid)" stroke="#dee2e6" stroke-width="2" rx="12"/>
+            
+            <!-- Layer Labels -->
+            <text x="20" y="30" font-size="14" font-weight="bold" fill="#2c3e50">User Layer</text>
+            <text x="20" y="150" font-size="14" font-weight="bold" fill="#2c3e50">API Layer</text>
+            <text x="20" y="270" font-size="14" font-weight="bold" fill="#2c3e50">Processing Layer</text>
+            <text x="20" y="390" font-size="14" font-weight="bold" fill="#2c3e50">ML Layer</text>
+            <text x="20" y="580" font-size="14" font-weight="bold" fill="#2c3e50">Data Layer</text>
+            
+            <!-- Users with enhanced design -->
+            <g transform="translate(150,50)">
+                <circle cx="30" cy="25" r="22" fill="url(#userGrad)" stroke="#d35400" stroke-width="3"/>
+                <text x="30" y="32" text-anchor="middle" font-size="18">👨‍💼</text>
+                <rect x="8" y="50" width="44" height="35" rx="18" fill="#3498db" stroke="#2980b9" stroke-width="3"/>
+                <text x="30" y="95" text-anchor="middle" font-size="11" font-weight="bold">Security Analyst</text>
+            </g>
+            
+            <g transform="translate(300,50)">
+                <circle cx="30" cy="25" r="22" fill="url(#userGrad)" stroke="#d35400" stroke-width="3"/>
+                <text x="30" y="32" text-anchor="middle" font-size="18">👤</text>
+                <rect x="8" y="50" width="44" height="35" rx="18" fill="#3498db" stroke="#2980b9" stroke-width="3"/>
+                <text x="30" y="95" text-anchor="middle" font-size="11" font-weight="bold">End User</text>
+            </g>
+            
+            <g transform="translate(450,50)">
+                <circle cx="30" cy="25" r="22" fill="url(#userGrad)" stroke="#d35400" stroke-width="3"/>
+                <text x="30" y="32" text-anchor="middle" font-size="18">🤖</text>
+                <rect x="8" y="50" width="44" height="35" rx="18" fill="#3498db" stroke="#2980b9" stroke-width="3"/>
+                <text x="30" y="95" text-anchor="middle" font-size="11" font-weight="bold">API Client</text>
+            </g>
+            
+            <!-- API Layer -->
+            <rect x="200" y="170" width="140" height="70" rx="15" fill="url(#apiGrad)" stroke="#5f3dc4" stroke-width="3"/>
+            <text x="270" y="195" text-anchor="middle" font-size="13" font-weight="bold" fill="white">FastAPI Gateway</text>
+            <text x="270" y="210" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Load Balancer</text>
+            <text x="270" y="230" text-anchor="middle" font-size="16">🚀</text>
+            
+            <rect x="400" y="170" width="120" height="70" rx="15" fill="url(#apiGrad)" stroke="#5f3dc4" stroke-width="3"/>
+            <text x="460" y="195" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Authentication</text>
+            <text x="460" y="210" text-anchor="middle" font-size="13" font-weight="bold" fill="white">& Rate Limiting</text>
+            <text x="460" y="230" text-anchor="middle" font-size="16">🔐</text>
+            
+            <!-- Processing Layer -->
+            <rect x="150" y="290" width="110" height="60" rx="12" fill="url(#processGrad)" stroke="#d63031" stroke-width="3"/>
+            <text x="205" y="312" text-anchor="middle" font-size="12" font-weight="bold">URL Validation</text>
+            <text x="205" y="327" text-anchor="middle" font-size="12" font-weight="bold">& Preprocessing</text>
+            <text x="205" y="340" text-anchor="middle" font-size="14">✅</text>
+            
+            <rect x="300" y="290" width="110" height="60" rx="12" fill="url(#processGrad)" stroke="#d63031" stroke-width="3"/>
+            <text x="355" y="312" text-anchor="middle" font-size="12" font-weight="bold">Feature</text>
+            <text x="355" y="327" text-anchor="middle" font-size="12" font-weight="bold">Engineering</text>
+            <text x="355" y="340" text-anchor="middle" font-size="14">⚙️</text>
+            
+            <rect x="450" y="290" width="110" height="60" rx="12" fill="url(#processGrad)" stroke="#d63031" stroke-width="3"/>
+            <text x="505" y="312" text-anchor="middle" font-size="12" font-weight="bold">Data Collection</text>
+            <text x="505" y="327" text-anchor="middle" font-size="12" font-weight="bold">& Scraping</text>
+            <text x="505" y="340" text-anchor="middle" font-size="14">🕷️</text>
+            
+            <!-- ML Models Layer -->
+            <rect x="120" y="410" width="100" height="55" rx="10" fill="url(#mlGrad)" stroke="#c0392b" stroke-width="3"/>
+            <text x="170" y="430" text-anchor="middle" font-size="11" font-weight="bold" fill="white">URLNet</text>
+            <text x="170" y="445" text-anchor="middle" font-size="11" font-weight="bold" fill="white">(CNN)</text>
+            <text x="170" y="458" text-anchor="middle" font-size="14">🧠</text>
+            
+            <rect x="250" y="410" width="100" height="55" rx="10" fill="url(#mlGrad)" stroke="#c0392b" stroke-width="3"/>
+            <text x="300" y="430" text-anchor="middle" font-size="11" font-weight="bold" fill="white">URL-BERT</text>
+            <text x="300" y="445" text-anchor="middle" font-size="11" font-weight="bold" fill="white">(Transformer)</text>
+            <text x="300" y="458" text-anchor="middle" font-size="14">🤖</text>
+            
+            <rect x="380" y="410" width="100" height="55" rx="10" fill="url(#mlGrad)" stroke="#c0392b" stroke-width="3"/>
+            <text x="430" y="430" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Random Forest</text>
+            <text x="430" y="445" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Classifier</text>
+            <text x="430" y="458" text-anchor="middle" font-size="14">🌳</text>
+            
+            <rect x="510" y="410" width="100" height="55" rx="10" fill="url(#mlGrad)" stroke="#c0392b" stroke-width="3"/>
+            <text x="560" y="430" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Graph Neural</text>
+            <text x="560" y="445" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Network</text>
+            <text x="560" y="458" text-anchor="middle" font-size="14">🕸️</text>
+            
+            <!-- Decision & Output -->
+            <rect x="680" y="290" width="130" height="80" rx="15" fill="url(#apiGrad)" stroke="#5f3dc4" stroke-width="3"/>
+            <text x="745" y="315" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Ensemble Engine</text>
+            <text x="745" y="330" text-anchor="middle" font-size="13" font-weight="bold" fill="white">& Decision Fusion</text>
+            <text x="745" y="350" text-anchor="middle" font-size="16">🎯</text>
+            
+            <rect x="680" y="410" width="130" height="55" rx="12" fill="url(#processGrad)" stroke="#d63031" stroke-width="3"/>
+            <text x="745" y="430" text-anchor="middle" font-size="12" font-weight="bold">Threat Intelligence</text>
+            <text x="745" y="445" text-anchor="middle" font-size="12" font-weight="bold">Real-time Feed</text>
+            <text x="745" y="458" text-anchor="middle" font-size="14">📡</text>
+            
+            <rect x="870" y="320" width="120" height="80" rx="15" fill="url(#apiGrad)" stroke="#5f3dc4" stroke-width="3"/>
+            <text x="930" y="345" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Detection Results</text>
+            <text x="930" y="360" text-anchor="middle" font-size="12" font-weight="bold" fill="white">& Analytics</text>
+            <text x="930" y="375" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Dashboard</text>
+            <text x="930" y="390" text-anchor="middle" font-size="16">📊</text>
+            
+            <!-- Enhanced 3D Databases -->
+            <g transform="translate(150,600)">
+                <ellipse cx="45" cy="12" rx="45" ry="10" fill="url(#dbGrad)" stroke="#2c3e50" stroke-width="2"/>
+                <rect x="0" y="12" width="90" height="45" fill="url(#dbGrad)" stroke="#2c3e50" stroke-width="2" stroke-dasharray="0,90,0,45"/>
+                <ellipse cx="45" cy="57" rx="45" ry="10" fill="#0984e3" stroke="#2c3e50" stroke-width="2"/>
+                <text x="45" y="80" text-anchor="middle" font-size="10" font-weight="bold">PhishTank Database</text>
+            </g>
+            
+            <g transform="translate(280,600)">
+                <ellipse cx="45" cy="12" rx="45" ry="10" fill="url(#dbGrad)" stroke="#2c3e50" stroke-width="2"/>
+                <rect x="0" y="12" width="90" height="45" fill="url(#dbGrad)" stroke="#2c3e50" stroke-width="2" stroke-dasharray="0,90,0,45"/>
+                <ellipse cx="45" cy="57" rx="45" ry="10" fill="#0984e3" stroke="#2c3e50" stroke-width="2"/>
+                <text x="45" y="80" text-anchor="middle" font-size="10" font-weight="bold">OpenPhish Feed</text>
+            </g>
+            
+            <g transform="translate(410,600)">
+                <ellipse cx="45" cy="12" rx="45" ry="10" fill="url(#dbGrad)" stroke="#2c3e50" stroke-width="2"/>
+                <rect x="0" y="12" width="90" height="45" fill="url(#dbGrad)" stroke="#2c3e50" stroke-width="2" stroke-dasharray="0,90,0,45"/>
+                <ellipse cx="45" cy="57" rx="45" ry="10" fill="#0984e3" stroke="#2c3e50" stroke-width="2"/>
+                <text x="45" y="80" text-anchor="middle" font-size="10" font-weight="bold">Alexa Top Sites</text>
+            </g>
+            
+            <g transform="translate(540,600)">
+                <ellipse cx="45" cy="12" rx="45" ry="10" fill="url(#dbGrad)" stroke="#2c3e50" stroke-width="2"/>
+                <rect x="0" y="12" width="90" height="45" fill="url(#dbGrad)" stroke="#2c3e50" stroke-width="2" stroke-dasharray="0,90,0,45"/>
+                <ellipse cx="45" cy="57" rx="45" ry="10" fill="#0984e3" stroke="#2c3e50" stroke-width="2"/>
+                <text x="45" y="80" text-anchor="middle" font-size="10" font-weight="bold">Model Repository</text>
+            </g>
+            
+            <g transform="translate(670,600)">
+                <ellipse cx="45" cy="12" rx="45" ry="10" fill="url(#dbGrad)" stroke="#2c3e50" stroke-width="2"/>
+                <rect x="0" y="12" width="90" height="45" fill="url(#dbGrad)" stroke="#2c3e50" stroke-width="2" stroke-dasharray="0,90,0,45"/>
+                <ellipse cx="45" cy="57" rx="45" ry="10" fill="#0984e3" stroke="#2c3e50" stroke-width="2"/>
+                <text x="45" y="80" text-anchor="middle" font-size="10" font-weight="bold">Detection Logs</text>
+            </g>
+            
+            <!-- Optimized Flow Arrows -->
+            <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#2c3e50"/>
+                </marker>
+            </defs>
+            
+            <!-- Main Flow -->
+            <path d="M 270 120 L 270 160" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 340 205 L 380 205" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 270 250 L 205 280" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 260 320 L 300 320" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 410 320 L 450 320" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            
+            <!-- Feature Engineering to ML Models -->
+            <path d="M 355 360 L 170 400" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 355 360 L 300 400" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 355 360 L 430 400" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 355 360 L 560 400" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            
+            <!-- ML to Ensemble -->
+            <path d="M 220 437 L 670 330" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 350 437 L 670 340" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 480 437 L 670 350" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 610 437 L 670 360" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            
+            <!-- Threat Intel to Ensemble -->
+            <path d="M 745 400 L 745 380" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            
+            <!-- Ensemble to Results -->
+            <path d="M 810 330 L 860 350" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            
+            <!-- Results back to Users -->
+            <path d="M 930 310 Q 1100 200 Q 1100 100 Q 600 50 Q 180 50 Q 180 100" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#arrow)" stroke-dasharray="4,4"/>
+            
+            <!-- Database Connections -->
+            <path d="M 195 590 L 205 360" stroke="#3498db" stroke-width="1.5" fill="none"/>
+            <path d="M 325 590 L 505 360" stroke="#3498db" stroke-width="1.5" fill="none"/>
+            <path d="M 455 590 L 355 360" stroke="#3498db" stroke-width="1.5" fill="none"/>
+            <path d="M 585 590 L 560 470" stroke="#3498db" stroke-width="1.5" fill="none"/>
+            <path d="M 715 590 L 930 410" stroke="#3498db" stroke-width="1.5" fill="none"/>
+            
+            <!-- Flow Labels -->
+            <text x="280" y="140" class="flow-label">URL Request</text>
+            <text x="360" y="195" class="flow-label">Auth & Validate</text>
+            <text x="220" y="270" class="flow-label">Process</text>
+            <text x="400" y="385" class="flow-label">Features</text>
+            <text x="550" y="375" class="flow-label">Predictions</text>
+            <text x="820" y="320" class="flow-label">Decision</text>
+            <text x="1000" y="150" class="flow-label">Response</text>
+            
+            <!-- Performance Indicators -->
+            <rect x="1050" y="450" width="180" height="120" rx="8" fill="rgba(255,255,255,0.95)" stroke="#27ae60" stroke-width="2"/>
+            <text x="1060" y="470" font-size="12" font-weight="bold" fill="#27ae60">⚡ Real-time Metrics</text>
+            <text x="1060" y="490" font-size="10">Response: &lt; 50ms</text>
+            <text x="1060" y="505" font-size="10">Accuracy: 99.7%</text>
+            <text x="1060" y="520" font-size="10">Throughput: 10K req/s</text>
+            <text x="1060" y="535" font-size="10">Uptime: 99.99%</text>
+            <text x="1060" y="550" font-size="10">False Positive: &lt; 0.1%</text>
+            <text x="1060" y="565" font-size="10">Model Ensemble: 4 models</text>
+        </svg>
+    </div>
+</body>
+</html>

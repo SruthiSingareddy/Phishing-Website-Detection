@@ -1,0 +1,121 @@
+@startuml
+' Class Diagram for Phishing Website Detection System
+
+' Feature Engineering Classes
+class AdvancedFeatureExtractor {
+    -suspicious_words: set
+    -url_shorteners: set
+    -suspicious_tlds: set
+    +extract_features(url: str, timeout: int): URLFeatures
+    -_extract_lexical_features(url: str, domain: str, path: str, query: str): dict
+    -_extract_character_features(url: str): dict
+    -_extract_advanced_lexical_features(url: str): dict
+    -_extract_domain_features(url: str, domain: str, subdomain: str, tld: str): dict
+    -_extract_suspicious_patterns(url: str, domain: str): dict
+    -_extract_network_features(domain: str, timeout: int): dict
+    -_calculate_entropy(text: str): float
+    -_is_ip_address(domain: str): bool
+}
+
+class URLFeatures {
+    +url: str
+    +protocol: str
+    +domain: str
+    +subdomain: str
+    +path: str
+    +query: str
+    +fragment: str
+    +url_length: int
+    +domain_length: int
+    +num_dots: int
+    +num_hyphens: int
+    +entropy: float
+    +is_ip_address: bool
+    +has_port: bool
+    +has_suspicious_words: bool
+    +dns_record_exists: bool
+    +ssl_certificate_valid: bool
+    +to_dict(): dict
+}
+
+' Model Classes
+class URLNet {
+    -embedding: CharacterEmbedding
+    -conv_layers: list
+    -attention: MultiHeadAttention
+    -feature_fusion: Sequential
+    -classifier: Sequential
+    +forward(x: Tensor, lengths: Tensor): dict
+}
+
+class URLTransformer {
+    -encoder: URLTransformerEncoder
+    -pooler: Linear
+    -classifier: Sequential
+    +forward(input_ids: Tensor, attention_mask: Tensor, token_type_ids: Tensor): dict
+}
+
+class CharacterEmbedding {
+    -char_embedding: Embedding
+    -pos_encoding: Tensor
+    +forward(x: Tensor): Tensor
+}
+
+class MultiHeadAttention {
+    -query: Linear
+    -key: Linear
+    -value: Linear
+    -out_proj: Linear
+    +forward(x: Tensor, mask: Tensor): Tensor
+}
+
+class URLTokenizer {
+    -max_length: int
+    -special_tokens: dict
+    -char_to_id: dict
+    +tokenize_url(url: str): dict
+    -_parse_url_components(url: str): dict
+}
+
+' Training Classes
+class ModelTrainer {
+    -config: dict
+    -device: str
+    -tokenizer: URLTokenizer
+    +train_urlnet(train_loader: DataLoader, val_loader: DataLoader): URLNet
+    +train_transformer(train_loader: DataLoader, val_loader: DataLoader): URLTransformer
+    +evaluate_model(model: nn.Module, test_loader: DataLoader, model_type: str): dict
+}
+
+class URLDataset {
+    -urls: list
+    -labels: list
+    -tokenizer: URLTokenizer
+    +__len__(): int
+    +__getitem__(idx: int): dict
+}
+
+' API Classes
+class URLRequest {
+    +url: str
+    +include_features: bool
+    +include_explanations: bool
+}
+
+class PredictionResponse {
+    +url: str
+    +is_phishing: bool
+    +confidence: float
+    +risk_score: float
+    +model_predictions: dict
+}
+
+' Relationships
+AdvancedFeatureExtractor --> URLFeatures
+URLNet --> CharacterEmbedding
+URLNet --> MultiHeadAttention
+URLTransformer --> URLTokenizer
+ModelTrainer --> URLTokenizer
+ModelTrainer --> URLDataset
+URLDataset --> URLTokenizer
+@enduml

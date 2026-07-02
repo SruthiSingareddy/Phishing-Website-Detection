@@ -1,0 +1,42 @@
+@startuml
+[*] --> Idle
+Idle --> Processing : URL submitted
+Processing --> FeatureExtraction : Start feature extraction
+FeatureExtraction --> URLNetProcessing : Features extracted
+URLNetProcessing --> TransformerProcessing : URLNet prediction complete
+TransformerProcessing --> ResultAggregation : Transformer prediction complete
+ResultAggregation --> DecisionMade : Results combined
+DecisionMade --> Phishing : Classified as phishing
+DecisionMade --> Legitimate : Classified as legitimate
+Phishing --> ReportGeneration : Generate detailed report
+Legitimate --> ReportGeneration : Generate detailed report
+ReportGeneration --> ResultsReady : Report completed
+ResultsReady --> DisplayResults : Show to user
+DisplayResults --> Idle : Results displayed
+
+Idle : Waiting for URL input
+Processing : Processing URL
+FeatureExtraction : Extracting URL features
+URLNetProcessing : Processing with URLNet model
+TransformerProcessing : Processing with Transformer model
+ResultAggregation : Combining model predictions
+DecisionMade : Making final classification
+Phishing : URL classified as phishing
+Legitimate : URL classified as legitimate
+ReportGeneration : Generating detailed analysis
+ResultsReady : Analysis complete
+DisplayResults : Showing results to user
+
+note right of Processing
+  System validates
+  URL format and
+  prepares for
+  analysis
+end note
+
+note right of DecisionMade
+  Ensemble decision
+  based on both
+  model predictions
+end note
+@enduml

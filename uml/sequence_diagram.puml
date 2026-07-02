@@ -1,0 +1,22 @@
+@startuml
+actor "User" as user
+participant "Web Interface" as web
+participant "API Server" as api
+participant "Feature Extractor" as fe
+participant "URLNet Model" as urlnet
+participant "Transformer Model" as transformer
+participant "Database" as db
+
+user -> web : Enter URL
+web -> api : Send URL for analysis
+api -> fe : Extract features
+fe --> api : Return features
+api -> urlnet : Process with URLNet
+urlnet --> api : Return prediction
+api -> transformer : Process with Transformer
+transformer --> api : Return prediction
+api -> db : Store results
+db --> api : Confirm storage
+api --> web : Send results
+web --> user : Display results
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+actor "End User" as user
+actor "System Administrator" as admin
+
+rectangle "Phishing Detection System" {
+  usecase "Enter URL for Analysis" as enter_url
+  usecase "View Analysis Results" as view_results
+  usecase "View Detailed Report" as view_report
+  usecase "Batch URL Analysis" as batch_analysis
+  usecase "System Configuration" as config
+  usecase "Model Management" as model_mgmt
+}
+
+user --> enter_url
+user --> view_results
+user --> view_report
+user --> batch_analysis
+admin --> config
+admin --> model_mgmt
+
+enter_url ..> view_results : includes
+view_results ..> view_report : extends
+@enduml

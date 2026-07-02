@@ -1,0 +1,56 @@
+@startuml
+[Frontend Web Interface] as frontend
+[API Gateway] as api_gateway
+[Feature Extraction Service] as feature_service
+[URLNet Model Service] as urlnet_service
+[Transformer Model Service] as transformer_service
+[Database Service] as db_service
+[Model Training Service] as training_service
+
+frontend --> api_gateway : HTTP Requests
+api_gateway --> feature_service : Feature extraction requests
+api_gateway --> urlnet_service : URLNet processing requests
+api_gateway --> transformer_service : Transformer processing requests
+feature_service --> db_service : Store features
+urlnet_service --> db_service : Store predictions
+transformer_service --> db_service : Store predictions
+api_gateway --> db_service : Retrieve results
+training_service --> db_service : Access training data
+training_service --> urlnet_service : Update URLNet model
+training_service --> transformer_service : Update Transformer model
+
+note right of frontend
+  React/Vue.js based
+  user interface
+end note
+
+note right of api_gateway
+  FastAPI/Flask
+  REST API
+end note
+
+note right of feature_service
+  Python-based feature
+  extraction module
+end note
+
+note right of urlnet_service
+  PyTorch-based CNN
+  model for URL analysis
+end note
+
+note right of transformer_service
+  PyTorch-based Transformer
+  model for URL analysis
+end note
+
+note right of db_service
+  SQLite/PostgreSQL
+  for data storage
+end note
+
+note right of training_service
+  Model training and
+  evaluation pipeline
+end note
+@enduml

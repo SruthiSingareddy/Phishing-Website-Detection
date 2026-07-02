@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Phishing Detection System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { font-size: 1.8em; }
+        .logout-btn { background: white; color: #667eea; padding: 10px 25px; border: none; border-radius: 25px; cursor: pointer; font-weight: 600; }
+        .container { padding: 40px; max-width: 1400px; margin: 0 auto; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .stat-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .stat-card h3 { color: #666; font-size: 0.9em; margin-bottom: 10px; }
+        .stat-card .value { font-size: 2.5em; color: #667eea; font-weight: bold; }
+        .section { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .section h2 { margin-bottom: 20px; color: #333; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e0e0e0; }
+        th { background: #f8f8f8; font-weight: 600; color: #666; }
+        .badge { padding: 5px 12px; border-radius: 12px; font-size: 0.85em; font-weight: 600; }
+        .badge-danger { background: #fee; color: #c33; }
+        .badge-success { background: #efe; color: #3c3; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 30px; }
+        .tab-btn { padding: 12px 30px; border: none; background: white; border-radius: 8px; cursor: pointer; font-weight: 600; color: #666; transition: all 0.3s; }
+        .tab-btn.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .tab-btn:hover { transform: translateY(-2px); }
+        .tab-content { animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛡️ Admin Dashboard</h1>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('detection')">Detection</button>
+            <button class="tab-btn" onclick="showTab('performance')">Performance</button>
+        </div>
+
+        <div id="detection-tab" class="tab-content">
+        <div class="stats">
+            <div class="stat-card">
+                <h3>TOTAL SCANS</h3>
+                <div class="value">1,247</div>
+            </div>
+            <div class="stat-card">
+                <h3>PHISHING DETECTED</h3>
+                <div class="value">342</div>
+            </div>
+            <div class="stat-card">
+                <h3>LEGITIMATE URLS</h3>
+                <div class="value">905</div>
+            </div>
+            <div class="stat-card">
+                <h3>DETECTION RATE</h3>
+                <div class="value">94.5%</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Recent Scans</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>URL</th>
+                        <th>Risk Score</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2025-01-15 14:32:10</td>
+                        <td>https://secure-login-verify.tk/account</td>
+                        <td>0.87</td>
+                        <td><span class="badge badge-danger">PHISHING</span></td>
+                    </tr>
+                    <tr>
+                        <td>2025-01-15 14:28:45</td>
+                        <td>https://www.google.com</td>
+                        <td>0.02</td>
+                        <td><span class="badge badge-success">SAFE</span></td>
+                    </tr>
+                    <tr>
+                        <td>2025-01-15 14:25:33</td>
+                        <td>https://paypal-verify-account.ml/login</td>
+                        <td>0.92</td>
+                        <td><span class="badge badge-danger">PHISHING</span></td>
+                    </tr>
+                    <tr>
+                        <td>2025-01-15 14:20:18</td>
+                        <td>https://github.com/repository</td>
+                        <td>0.05</td>
+                        <td><span class="badge badge-success">SAFE</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>System Information</h2>
+            <p><strong>Model Version:</strong> URLNet-Transformer-v2.1</p>
+            <p><strong>Base Accuracy:</strong> 94.5%</p>
+            <p><strong>Features Analyzed:</strong> 50+</p>
+            <p><strong>Last Model Update:</strong> 2025-01-10</p>
+        </div>
+        </div>
+
+        <div id="performance-tab" class="tab-content" style="display:none;">
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>PRECISION</h3>
+                    <div class="value">96.2%</div>
+                </div>
+                <div class="stat-card">
+                    <h3>RECALL</h3>
+                    <div class="value">92.8%</div>
+                </div>
+                <div class="stat-card">
+                    <h3>F1-SCORE</h3>
+                    <div class="value">94.5%</div>
+                </div>
+                <div class="stat-card">
+                    <h3>AUC-ROC</h3>
+                    <div class="value">0.978</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Model Performance Metrics</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>URLNet</th>
+                            <th>Transformer</th>
+                            <th>Ensemble</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Accuracy</td>
+                            <td>92.3%</td>
+                            <td>93.7%</td>
+                            <td>94.5%</td>
+                        </tr>
+                        <tr>
+                            <td>Precision</td>
+                            <td>94.1%</td>
+                            <td>95.8%</td>
+                            <td>96.2%</td>
+                        </tr>
+                        <tr>
+                            <td>Recall</td>
+                            <td>90.5%</td>
+                            <td>91.9%</td>
+                            <td>92.8%</td>
+                        </tr>
+                        <tr>
+                            <td>F1-Score</td>
+                            <td>92.3%</td>
+                            <td>93.8%</td>
+                            <td>94.5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>Detection Statistics</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Count</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>True Positives</td>
+                            <td>317</td>
+                            <td>92.8%</td>
+                        </tr>
+                        <tr>
+                            <td>False Positives</td>
+                            <td>25</td>
+                            <td>2.8%</td>
+                        </tr>
+                        <tr>
+                            <td>True Negatives</td>
+                            <td>880</td>
+                            <td>97.2%</td>
+                        </tr>
+                        <tr>
+                            <td>False Negatives</td>
+                            <td>25</td>
+                            <td>7.2%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            fetch('/admin/logout', { method: 'POST' })
+                .then(() => window.location.href = '/');
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

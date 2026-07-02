@@ -1,0 +1,287 @@
+# Advanced Phishing Detection Configuration
+# Configuration file for training, evaluation, and deployment
+
+# Data Configuration
+data:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  database_path: "data/urls.db"
+  max_urls_per_source: 10000
+  test_size: 0.2
+  validation_size: 0.2
+  balance_classes: true
+  random_state: 42
+
+# Data Collection
+collection:
+  sources:
+    phishtank:
+      enabled: true
+      url: "http://data.phishtank.com/data/online-valid.json"
+      limit: 5000
+    openphish:
+      enabled: true
+      url: "https://openphish.com/feed.txt"
+      limit: 5000
+    legitimate:
+      enabled: true
+      limit: 10000
+  
+  rate_limiting:
+    delay_seconds: 1.0
+    max_retries: 3
+    timeout: 30
+  
+  parallel_processing:
+    max_workers: 10
+    batch_size: 100
+
+# Feature Engineering
+features:
+  extraction:
+    timeout: 5
+    include_network_features: true
+    include_whois_features: true
+    include_ssl_features: true
+  
+  lexical_features:
+    - url_length
+    - domain_length
+    - path_length
+    - query_length
+    - num_dots
+    - num_hyphens
+    - num_underscores
+    - num_slashes
+    - entropy
+    - vowel_consonant_ratio
+    - digit_letter_ratio
+  
+  network_features:
+    - dns_record_exists
+    - whois_registered
+    - domain_age_days
+    - ssl_certificate_valid
+    - redirect_count
+    - response_time
+
+# Model Configuration
+models:
+  # URLNet Configuration
+  urlnet:
+    vocab_size: 128
+    embed_dim: 128
+    num_filters: 256
+    filter_sizes: [3, 4, 5, 6]
+    num_heads: 8
+    hidden_dim: 512
+    num_classes: 2
+    max_length: 200
+    dropout: 0.3
+    
+    # Training specific
+    batch_size: 32
+    learning_rate: 0.001
+    weight_decay: 0.01
+    epochs: 50
+    patience: 7
+    
+    # Loss function
+    loss:
+      type: "focal"
+      alpha: 0.25
+      gamma: 2.0
+      label_smoothing: 0.1
+  
+  # URL Transformer Configuration
+  transformer:
+    vocab_size: 128  # Will be set based on tokenizer
+    hidden_size: 768
+    num_attention_heads: 12
+    num_hidden_layers: 6
+    intermediate_size: 3072
+    max_position_embeddings: 200
+    num_classes: 2
+    dropout: 0.1
+    
+    # Training specific
+    batch_size: 16
+    learning_rate: 0.0001
+    weight_decay: 0.01
+    epochs: 30
+    patience: 5
+    
+    # Loss function
+    loss:
+      type: "cross_entropy"
+      label_smoothing: 0.1
+  
+  # Ensemble Configuration
+  ensemble:
+    method: "weighted_average"
+    weights:
+      urlnet: 0.6
+      transformer: 0.4
+    
+    # Meta-learner (optional)
+    meta_learner:
+      enabled: false
+      type: "logistic_regression"
+      cv_folds: 5
+
+# Training Configuration
+training:
+  device: "auto"  # auto, cpu, cuda
+  mixed_precision: true
+  gradient_clipping: 1.0
+  
+  # Data loading
+  num_workers: 4
+  pin_memory: true
+  
+  # Checkpointing
+  save_best_only: true
+  save_frequency: 5  # epochs
+  
+  # Early stopping
+  monitor: "val_accuracy"
+  mode: "max"
+  min_delta: 0.001
+  
+  # Learning rate scheduling
+  scheduler:
+    type: "reduce_on_plateau"
+    factor: 0.5
+    patience: 3
+    min_lr: 0.00001
+
+# Evaluation Configuration
+evaluation:
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1_score
+    - auc_roc
+    - auc_pr
+  
+  # Threshold optimization
+  threshold_optimization:
+    enabled: true
+    method: "f1_score"  # f1_score, precision_recall, roc
+    
+  # Cross-validation
+  cross_validation:
+    enabled: false
+    folds: 5
+    stratified: true
+
+# API Configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  
+  # Rate limiting
+  rate_limit:
+    enabled: true
+    requests_per_minute: 100
+    burst_size: 10
+  
+  # Caching
+  cache:
+    enabled: true
+    ttl_seconds: 3600
+    max_size: 10000
+  
+  # Security
+  security:
+    cors_enabled: true
+    allowed_origins: ["*"]
+    api_key_required: false
+  
+  # Monitoring
+  monitoring:
+    enabled: true
+    log_predictions: true
+    metrics_endpoint: "/metrics"
+
+# Deployment Configuration
+deployment:
+  model_dir: "models"
+  
+  # Docker
+  docker:
+    base_image: "python:3.9-slim"
+    requirements_file: "requirements.txt"
+    port: 8000
+  
+  # Cloud deployment
+  cloud:
+    provider: "aws"  # aws, gcp, azure
+    instance_type: "t3.medium"
+    auto_scaling:
+      enabled: true
+      min_instances: 1
+      max_instances: 5
+      target_cpu: 70
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  # File logging
+  file:
+    enabled: true
+    path: "logs/phishing_detection.log"
+    max_size: "10MB"
+    backup_count: 5
+  
+  # Console logging
+  console:
+    enabled: true
+    colored: true
+
+# Monitoring and Alerting
+monitoring:
+  # Performance monitoring
+  performance:
+    enabled: true
+    log_inference_time: true
+    alert_slow_requests: true
+    slow_threshold_seconds: 5.0
+  
+  # Model drift detection
+  drift_detection:
+    enabled: true
+    window_size: 1000
+    threshold: 0.1
+    
+  # Alerts
+  alerts:
+    enabled: false
+    webhook_url: ""
+    email_recipients: []
+
+# Experimental Features
+experimental:
+  # Advanced architectures
+  architectures:
+    graph_neural_network: false
+    attention_visualization: true
+    explainable_ai: true
+  
+  # Data augmentation
+  data_augmentation:
+    enabled: false
+    techniques:
+      - character_substitution
+      - domain_permutation
+      - path_modification
+  
+  # Active learning
+  active_learning:
+    enabled: false
+    strategy: "uncertainty_sampling"
+    batch_size: 100

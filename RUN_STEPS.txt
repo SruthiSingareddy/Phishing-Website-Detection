@@ -1,0 +1,20 @@
+Install required packages:
+   pip install flask
+   pip install dnspython
+   pip install python-whois
+   pip install tldextract
+   pip install requests
+
+
+Run the application:
+   python app.py
+
+
+Open browser and go to:
+   http://localhost:5000
+
+
+Admin Dashboard:
+   http://localhost:5000/admin/login
+   Username: admin
+   Password: admin123

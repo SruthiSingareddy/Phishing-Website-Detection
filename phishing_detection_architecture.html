@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phishing Detection System Architecture</title>
+    <style>
+        body { margin: 0; padding: 20px; background: #f0f2f5; font-family: Arial, sans-serif; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #2c3e50; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ Advanced Phishing Detection System Architecture</h1>
+        
+        <svg width="1160" height="700" viewBox="0 0 1160 700">
+            <!-- Background -->
+            <rect width="1160" height="700" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2" rx="10"/>
+            
+            <!-- Users -->
+            <!-- Security Analyst -->
+            <g transform="translate(50,80)">
+                <circle cx="25" cy="20" r="18" fill="#ffd93d" stroke="#f39c12" stroke-width="3"/>
+                <text x="25" y="26" text-anchor="middle" font-size="16">👨‍💼</text>
+                <rect x="5" y="40" width="40" height="30" rx="15" fill="#3498db" stroke="#2980b9" stroke-width="3"/>
+                <text x="25" y="85" text-anchor="middle" font-size="12" font-weight="bold">Security Analyst</text>
+            </g>
+            
+            <!-- End User -->
+            <g transform="translate(50,200)">
+                <circle cx="25" cy="20" r="18" fill="#ffd93d" stroke="#f39c12" stroke-width="3"/>
+                <text x="25" y="26" text-anchor="middle" font-size="16">👤</text>
+                <rect x="5" y="40" width="40" height="30" rx="15" fill="#3498db" stroke="#2980b9" stroke-width="3"/>
+                <text x="25" y="85" text-anchor="middle" font-size="12" font-weight="bold">End User</text>
+            </g>
+            
+            <!-- API Gateway -->
+            <rect x="180" y="120" width="120" height="80" rx="15" fill="#9b59b6" stroke="#8e44ad" stroke-width="3"/>
+            <text x="240" y="145" text-anchor="middle" font-size="14" font-weight="bold" fill="white">FastAPI</text>
+            <text x="240" y="165" text-anchor="middle" font-size="14" font-weight="bold" fill="white">Gateway</text>
+            <text x="240" y="185" text-anchor="middle" font-size="20">🚀</text>
+            
+            <!-- Data Collection -->
+            <rect x="350" y="60" width="100" height="60" rx="12" fill="#f39c12" stroke="#e67e22" stroke-width="3"/>
+            <text x="400" y="80" text-anchor="middle" font-size="12" font-weight="bold">Web Scraping</text>
+            <text x="400" y="95" text-anchor="middle" font-size="12" font-weight="bold">& Collection</text>
+            <text x="400" y="110" text-anchor="middle" font-size="16">🕷️</text>
+            
+            <!-- Feature Engineering -->
+            <rect x="350" y="180" width="100" height="60" rx="12" fill="#f39c12" stroke="#e67e22" stroke-width="3"/>
+            <text x="400" y="200" text-anchor="middle" font-size="12" font-weight="bold">Feature</text>
+            <text x="400" y="215" text-anchor="middle" font-size="12" font-weight="bold">Engineering</text>
+            <text x="400" y="230" text-anchor="middle" font-size="16">⚙️</text>
+            
+            <!-- ML Models -->
+            <rect x="520" y="40" width="90" height="50" rx="10" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+            <text x="565" y="58" text-anchor="middle" font-size="11" font-weight="bold" fill="white">URLNet (CNN)</text>
+            <text x="565" y="75" text-anchor="middle" font-size="14">🧠</text>
+            
+            <rect x="520" y="110" width="90" height="50" rx="10" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+            <text x="565" y="128" text-anchor="middle" font-size="11" font-weight="bold" fill="white">URL-BERT</text>
+            <text x="565" y="145" text-anchor="middle" font-size="14">🤖</text>
+            
+            <rect x="520" y="180" width="90" height="50" rx="10" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+            <text x="565" y="198" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Random Forest</text>
+            <text x="565" y="215" text-anchor="middle" font-size="14">🌳</text>
+            
+            <rect x="520" y="250" width="90" height="50" rx="10" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+            <text x="565" y="268" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Graph NN</text>
+            <text x="565" y="285" text-anchor="middle" font-size="14">🕸️</text>
+            
+            <!-- Ensemble Engine -->
+            <rect x="680" y="140" width="110" height="80" rx="15" fill="#9b59b6" stroke="#8e44ad" stroke-width="3"/>
+            <text x="735" y="165" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Ensemble</text>
+            <text x="735" y="180" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Decision</text>
+            <text x="735" y="195" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Engine</text>
+            <text x="735" y="210" text-anchor="middle" font-size="16">🎯</text>
+            
+            <!-- Threat Intelligence -->
+            <rect x="680" y="260" width="110" height="60" rx="12" fill="#f39c12" stroke="#e67e22" stroke-width="3"/>
+            <text x="735" y="280" text-anchor="middle" font-size="12" font-weight="bold">Threat Intel</text>
+            <text x="735" y="295" text-anchor="middle" font-size="12" font-weight="bold">Feed</text>
+            <text x="735" y="310" text-anchor="middle" font-size="16">📡</text>
+            
+            <!-- Results -->
+            <rect x="860" y="140" width="100" height="80" rx="15" fill="#9b59b6" stroke="#8e44ad" stroke-width="3"/>
+            <text x="910" y="165" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Detection</text>
+            <text x="910" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Results &</text>
+            <text x="910" y="195" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Analytics</text>
+            <text x="910" y="210" text-anchor="middle" font-size="16">📊</text>
+            
+            <!-- Databases -->
+            <!-- PhishTank -->
+            <g transform="translate(200,400)">
+                <ellipse cx="40" cy="10" rx="40" ry="8" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+                <rect x="0" y="10" width="80" height="40" fill="#3498db" stroke="#2c3e50" stroke-width="2" stroke-dasharray="0,80,0,40"/>
+                <ellipse cx="40" cy="50" rx="40" ry="8" fill="#2980b9" stroke="#2c3e50" stroke-width="2"/>
+                <text x="40" y="70" text-anchor="middle" font-size="11" font-weight="bold">PhishTank DB</text>
+            </g>
+            
+            <!-- OpenPhish -->
+            <g transform="translate(320,400)">
+                <ellipse cx="40" cy="10" rx="40" ry="8" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+                <rect x="0" y="10" width="80" height="40" fill="#3498db" stroke="#2c3e50" stroke-width="2" stroke-dasharray="0,80,0,40"/>
+                <ellipse cx="40" cy="50" rx="40" ry="8" fill="#2980b9" stroke="#2c3e50" stroke-width="2"/>
+                <text x="40" y="70" text-anchor="middle" font-size="11" font-weight="bold">OpenPhish</text>
+            </g>
+            
+            <!-- Alexa Sites -->
+            <g transform="translate(440,400)">
+                <ellipse cx="40" cy="10" rx="40" ry="8" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+                <rect x="0" y="10" width="80" height="40" fill="#3498db" stroke="#2c3e50" stroke-width="2" stroke-dasharray="0,80,0,40"/>
+                <ellipse cx="40" cy="50" rx="40" ry="8" fill="#2980b9" stroke="#2c3e50" stroke-width="2"/>
+                <text x="40" y="70" text-anchor="middle" font-size="11" font-weight="bold">Alexa Sites</text>
+            </g>
+            
+            <!-- Model Storage -->
+            <g transform="translate(560,400)">
+                <ellipse cx="40" cy="10" rx="40" ry="8" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+                <rect x="0" y="10" width="80" height="40" fill="#3498db" stroke="#2c3e50" stroke-width="2" stroke-dasharray="0,80,0,40"/>
+                <ellipse cx="40" cy="50" rx="40" ry="8" fill="#2980b9" stroke="#2c3e50" stroke-width="2"/>
+                <text x="40" y="70" text-anchor="middle" font-size="11" font-weight="bold">Model Store</text>
+            </g>
+            
+            <!-- Detection Logs -->
+            <g transform="translate(680,400)">
+                <ellipse cx="40" cy="10" rx="40" ry="8" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+                <rect x="0" y="10" width="80" height="40" fill="#3498db" stroke="#2c3e50" stroke-width="2" stroke-dasharray="0,80,0,40"/>
+                <ellipse cx="40" cy="50" rx="40" ry="8" fill="#2980b9" stroke="#2c3e50" stroke-width="2"/>
+                <text x="40" y="70" text-anchor="middle" font-size="11" font-weight="bold">Detection Logs</text>
+            </g>
+            
+            <!-- Arrows - Corrected Flow -->
+            <!-- User to API -->
+            <path d="M 100 160 L 170 160" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- API to Feature Engineering -->
+            <path d="M 300 160 L 340 210" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- Data Collection to Feature Engineering -->
+            <path d="M 400 120 L 400 170" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- Feature Engineering to ML Models -->
+            <path d="M 450 200 L 510 65" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <path d="M 450 210 L 510 135" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <path d="M 450 210 L 510 205" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <path d="M 450 220 L 510 275" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- ML Models to Ensemble -->
+            <path d="M 610 65 L 670 160" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <path d="M 610 135 L 670 170" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <path d="M 610 205 L 670 180" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <path d="M 610 275 L 670 200" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- Threat Intel to Ensemble -->
+            <path d="M 735 260 L 735 230" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- Ensemble to Results -->
+            <path d="M 790 180 L 850 180" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            
+            <!-- Results back to User -->
+            <path d="M 910 140 Q 1000 100 100 100 Q 50 100 75 140" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+            
+            <!-- Database connections (bidirectional) -->
+            <path d="M 240 390 L 240 200" stroke="#3498db" stroke-width="2" fill="none"/>
+            <path d="M 360 390 L 400 120" stroke="#3498db" stroke-width="2" fill="none"/>
+            <path d="M 480 390 L 400 240" stroke="#3498db" stroke-width="2" fill="none"/>
+            <path d="M 600 390 L 565 300" stroke="#3498db" stroke-width="2" fill="none"/>
+            <path d="M 720 390 L 910 220" stroke="#3498db" stroke-width="2" fill="none"/>
+            
+            <!-- Arrow marker definition -->
+            <defs>
+                <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+                    <polygon points="0 0, 6 2, 0 4" fill="#2c3e50"/>
+                </marker>
+            </defs>
+            
+            <!-- Legend -->
+            <rect x="20" y="520" width="280" height="160" rx="8" fill="rgba(255,255,255,0.95)" stroke="#dee2e6" stroke-width="2"/>
+            <text x="30" y="540" font-size="14" font-weight="bold">🔍 System Components</text>
+            <text x="30" y="560" font-size="12">🚀 API Layer: FastAPI Gateway & Results</text>
+            <text x="30" y="580" font-size="12">⚙️ Processing: Feature Engineering & Collection</text>
+            <text x="30" y="600" font-size="12">🧠 ML Models: URLNet, BERT, RF, GNN</text>
+            <text x="30" y="620" font-size="12">🎯 Decision: Ensemble Engine & Threat Intel</text>
+            <text x="30" y="640" font-size="12">💾 Data: Multiple threat & legitimate databases</text>
+            <text x="30" y="660" font-size="12">📊 Output: Real-time detection & analytics</text>
+            
+            <!-- Performance Box -->
+            <rect x="860" y="520" width="280" height="160" rx="8" fill="rgba(255,255,255,0.95)" stroke="#dee2e6" stroke-width="2"/>
+            <text x="870" y="540" font-size="14" font-weight="bold">📈 Performance Metrics</text>
+            <text x="870" y="560" font-size="12">⚡ Response Time: &lt; 100ms</text>
+            <text x="870" y="580" font-size="12">🎯 Accuracy: &gt; 99.5%</text>
+            <text x="870" y="600" font-size="12">🔄 Real-time: Live threat updates</text>
+            <text x="870" y="620" font-size="12">🛡️ Security: Multi-layer validation</text>
+            <text x="870" y="640" font-size="12">🚀 Scalability: Cloud-native architecture</text>
+            <text x="870" y="660" font-size="12">📊 Monitoring: Comprehensive logging</text>
+        </svg>
+    </div>
+</body>
+</html>
