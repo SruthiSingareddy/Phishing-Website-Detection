@@ -1,4 +1,3 @@
-<img width="1905" height="1020" alt="Screenshot 2026-03-24 110455" src="https://github.com/user-attachments/assets/3a7e0783-b379-49f9-8c1b-da17a5b581d0" />
 
 # Advanced Phishing Website Detection System (2025)
 
