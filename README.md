@@ -54,7 +54,7 @@ Advanced-Phishing-Detection-2025/
 <img width="1902" height="1009" alt="Screenshot 2026-03-24 110249" src="https://github.com/user-attachments/assets/f6bad4b2-892b-4bef-af23-12f1aa1a306f" />
 <img width="1898" height="989" alt="Screenshot 2026-03-24 110320" src="https://github.com/user-attachments/assets/9c662e4b-2b8f-4b90-97ee-df76c1a2e60c" />
 <img width="1906" height="990" alt="Screenshot 2026-03-24 110351" src="https://github.com/user-attachments/assets/d5bdd2e8-bf96-42ac-8faf-786508f6ee04" />
-<img width="1919" height="1016" alt="Screenshot 2026-03-24 110422" src="https://github.com/user-attachments/assets/2497133a-9fd9-4851-beb1-2c81ab9cc277" />
+
 <img width="1759" height="710" alt="Screenshot 2026-02-10 130839" src="https://github.com/user-attachments/assets/812b0c9c-9f84-4fbf-a069-e0a8306bbdf5" />
 
 
