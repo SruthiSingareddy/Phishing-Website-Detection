@@ -1,3 +1,4 @@
+<img width="1759" height="710" alt="Screenshot 2026-02-10 130839" src="https://github.com/user-attachments/assets/1020c56f-8a44-428c-b5dc-40a04b4e551b" />
 # Advanced Phishing Website Detection System (2025)
 
 ## 🎯 Project Overview
